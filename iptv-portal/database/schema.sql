@@ -1,0 +1,41 @@
+CREATE DATABASE IF NOT EXISTS bombalamoy_usr CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE bombalamoy_usr;
+
+CREATE TABLE users (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ username VARCHAR(40) NOT NULL UNIQUE,
+ email VARCHAR(190) NOT NULL UNIQUE,
+ password_hash VARCHAR(255) NOT NULL,
+ is_admin TINYINT(1) NOT NULL DEFAULT 0,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE playlists (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ title VARCHAR(150) NOT NULL,
+ description TEXT NOT NULL,
+ category ENUM('FREE','VIP') NOT NULL DEFAULT 'FREE',
+ poster_url VARCHAR(500) NOT NULL,
+ playlist_url VARCHAR(1000) DEFAULT NULL,
+ file_path VARCHAR(255) DEFAULT NULL,
+ views INT UNSIGNED NOT NULL DEFAULT 0,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE ratings (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ user_id INT UNSIGNED NOT NULL,
+ playlist_id INT UNSIGNED NOT NULL,
+ stars TINYINT UNSIGNED NOT NULL,
+ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ UNIQUE KEY one_rating_per_user (user_id, playlist_id),
+ CONSTRAINT ratings_user_fk FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+ CONSTRAINT ratings_playlist_fk FOREIGN KEY (playlist_id) REFERENCES playlists(id) ON DELETE CASCADE,
+ CONSTRAINT valid_stars CHECK (stars BETWEEN 1 AND 5)
+) ENGINE=InnoDB;
+
+-- Create the requested initial admin; replace the hash using password_hash('ncsIaq01', PASSWORD_DEFAULT).
+INSERT INTO users (username, email, password_hash, is_admin)
+VALUES ('bombalayf', 'admin@bombala.local', '$2y$12$Af1moqxVRfycVQdAasu2iOUqztYRRSu5iQ0iOxpL9nF0F1E0pHDTW', 1);

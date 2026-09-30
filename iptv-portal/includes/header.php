@@ -1,0 +1,3 @@
+<?php require_once __DIR__ . '/config.php'; ?>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?= e($title ?? APP_NAME) ?></title><link rel="stylesheet" href="/assets/style.css"></head>
+<body><header class="header"><a href="/" class="brand"><span class="brand-mark">B</span><span>BOMBALA <b>IPTV</b></span></a><nav><a href="/">Каталог</a><?php if (is_admin()): ?><a href="/admin/">Админка</a><?php endif; ?><?php if (logged_in()): ?><span class="hello">Привет, <?= e(user()['username']) ?></span><a class="button ghost" href="/logout.php">Выйти</a><?php else: ?><a href="/login.php">Войти</a><a class="button" href="/register.php">Регистрация</a><?php endif; ?></nav></header><main>

@@ -1,0 +1,6 @@
+<?php require_once __DIR__ . '/includes/config.php';
+if (logged_in()) redirect('/');
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') { verify_csrf(); $stmt=db()->prepare('SELECT * FROM users WHERE email=? OR username=? LIMIT 1'); $stmt->execute([trim($_POST['identity']), trim($_POST['identity'])]); $account=$stmt->fetch(); if ($account && password_verify($_POST['password'], $account['password_hash'])) { session_regenerate_id(true); $_SESSION['user']=['id'=>$account['id'],'username'=>$account['username'],'is_admin'=>$account['is_admin']]; redirect($_POST['next'] ?: '/'); } $error='Неверный логин или пароль.'; }
+$title='Вход · '.APP_NAME; require __DIR__.'/includes/header.php'; ?>
+<section class="auth"><form method="post" class="panel"><p class="eyebrow">С ВОЗВРАЩЕНИЕМ</p><h1>Войти в аккаунт</h1><?php if($error): ?><p class="error"><?=e($error)?></p><?php endif; ?><input type="hidden" name="csrf" value="<?=csrf()?>"><input type="hidden" name="next" value="<?=e($_GET['next'] ?? '')?>"><label>Почта или логин<input name="identity" required autocomplete="username"></label><label>Пароль<input type="password" name="password" required autocomplete="current-password"></label><button class="button wide">Войти</button><p>Нет аккаунта? <a href="/register.php">Зарегистрироваться</a></p></form></section><?php require __DIR__.'/includes/footer.php'; ?>
