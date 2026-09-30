@@ -29,6 +29,11 @@ function isAdmin(): bool
     return !empty($_SESSION['admin_id']);
 }
 
+function isLoggedIn(): bool
+{
+    return !empty($_SESSION['user_id']);
+}
+
 function requireAdmin(): void
 {
     if (!isAdmin()) {
