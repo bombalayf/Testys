@@ -30,6 +30,16 @@ CREATE TABLE IF NOT EXISTS playlists (
   CONSTRAINT fk_playlists_category FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS comments (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  playlist_id INT UNSIGNED NOT NULL,
+  user_id INT UNSIGNED NOT NULL,
+  body VARCHAR(1000) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_comments_playlist FOREIGN KEY (playlist_id) REFERENCES playlists(id) ON DELETE CASCADE,
+  CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 INSERT IGNORE INTO users (id, username, password_hash, role) VALUES
 (1, 'bombalayf', '$2y$12$..vtV/uVRR8e2svboyZeIeSxYi1S9VUn1CpXqeRcxPVeqviDVRoIq', 'admin');
 INSERT IGNORE INTO categories (id, title, slug, sort_order) VALUES
