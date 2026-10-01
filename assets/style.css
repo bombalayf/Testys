@@ -1,0 +1,38 @@
+:root { --bg:#090a11; --card:#171923; --line:#343845; --ink:#f7f7fb; --muted:#a9adbd; --accent:#c8ff2c; --violet:#7757ff; }
+* { box-sizing:border-box; }
+body { margin:0; min-width:320px; color:var(--ink); font:500 16px/1.45 Manrope, Arial, sans-serif; background:radial-gradient(ellipse 65% 45% at 80% 15%, #292050 0%, transparent 68%), var(--bg); }
+a { color:inherit; text-decoration:none; }
+.site-header { min-height:92px; padding:18px clamp(20px, 5vw, 80px); display:flex; align-items:center; justify-content:space-between; gap:28px; border-bottom:1px solid #232631; background:#090a11e8; }
+.brand { display:flex; align-items:center; gap:12px; min-width:max-content; }
+.brand img { width:47px; height:47px; border-radius:13px; }
+.brand span { display:grid; line-height:.92; letter-spacing:-1.4px; }
+.brand strong { font-size:24px; font-weight:800; }
+.brand em { color:var(--accent); font-size:22px; font-style:normal; font-weight:800; }
+.site-header nav { display:flex; align-items:center; gap:28px; font-size:15px; }
+.site-header nav > a:first-child { color:#d1d2dc; }
+.registration { padding:13px 23px; color:#131510; background:var(--accent); border-radius:12px; font-weight:800; transition:transform .2s, box-shadow .2s; }
+.registration:hover, .save-button:hover { transform:translateY(-2px); box-shadow:0 10px 26px #c8ff2c30; }
+.page-shell { width:min(100% - 40px, 830px); margin:0 auto; padding:50px 0 80px; }
+.back-link { display:inline-flex; gap:10px; align-items:center; margin-bottom:32px; color:#ae96ff; font-size:17px; }
+.profile-card { padding:clamp(28px, 5vw, 54px); border:1px solid var(--line); border-radius:30px; background:linear-gradient(135deg,#191b25 0%,#171923 70%); box-shadow:0 24px 70px #0008; }
+.profile-heading { display:flex; align-items:center; gap:25px; margin-bottom:44px; }
+.profile-icon { width:88px; height:88px; flex:none; border-radius:50%; box-shadow:0 0 0 5px #8066f5, 0 12px 24px #0005; }
+.eyebrow { margin:0 0 6px; color:#b39bff; font-size:13px; font-weight:800; letter-spacing:.19em; text-transform:uppercase; }
+h1 { margin:0; font-size:clamp(32px, 5vw, 52px); line-height:1.08; letter-spacing:-.055em; }
+.field-group { margin-bottom:29px; }
+.field-group > label { display:block; margin-bottom:11px; font-size:19px; font-weight:800; }
+.field-hint { margin:-5px 0 12px; color:var(--muted); font-size:14px; }
+input:not(.file-input) { width:100%; height:63px; padding:0 19px; color:var(--ink); border:1px solid #363a46; border-radius:15px; outline:none; background:#0e1017; font:500 18px Manrope, sans-serif; transition:border-color .2s, box-shadow .2s; }
+input:not(.file-input):focus { border-color:#886cff; box-shadow:0 0 0 4px #7658ff25; }
+.file-input { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; clip-path:inset(50%); }
+.file-picker { width:100%; min-height:78px; padding:12px 15px; display:flex; align-items:center; gap:13px; cursor:pointer; border:1px dashed #545a6a; border-radius:15px; background:#10121a; transition:border-color .2s, background .2s; }
+.file-picker:hover { border-color:var(--accent); background:#171c19; }
+.upload-icon { width:43px; height:43px; display:grid; flex:none; place-items:center; color:#16180d; border-radius:12px; background:var(--accent); font-size:25px; font-weight:800; }
+.file-copy { min-width:0; display:grid; gap:2px; }
+.file-copy b { font-size:15px; }
+.file-copy small { color:var(--muted); font-size:12px; }
+.file-name { margin-left:auto; max-width:30%; overflow:hidden; color:#c3c6d1; font-size:12px; text-overflow:ellipsis; white-space:nowrap; }
+.save-button { width:100%; min-height:64px; margin-top:4px; padding:14px 20px; display:flex; justify-content:center; align-items:center; gap:16px; cursor:pointer; color:#fff; border:0; border-radius:15px; background:linear-gradient(105deg,#5748f1,#9665f7); font:800 19px Manrope,sans-serif; transition:transform .2s, box-shadow .2s; }
+.save-button span { font-size:25px; line-height:1; }
+@media (max-width:600px) { .site-header { min-height:76px; padding:13px 18px; } .brand { gap:8px; } .brand img { width:39px; height:39px; border-radius:11px; } .brand strong { font-size:18px; } .brand em { font-size:17px; } .site-header nav { gap:14px; font-size:13px; } .registration { padding:11px 13px; border-radius:10px; } .page-shell { width:min(100% - 28px, 830px); padding:29px 0 45px; } .back-link { margin-bottom:21px; font-size:16px; } .profile-card { padding:25px 20px; border-radius:23px; } .profile-heading { gap:16px; margin-bottom:34px; } .profile-icon { width:66px; height:66px; } .eyebrow { font-size:10px; } .field-group > label { font-size:17px; } .file-picker { min-height:70px; gap:10px; } .upload-icon { width:38px; height:38px; border-radius:10px; } .file-copy b { font-size:13px; } .file-copy small { font-size:10px; } .file-name { max-width:27%; font-size:10px; } }
+@media (max-width:390px) { .site-header nav > a:first-child { display:none; } .site-header { gap:12px; } .profile-heading { align-items:flex-start; } }
